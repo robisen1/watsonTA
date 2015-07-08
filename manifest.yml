@@ -1,0 +1,12 @@
+---
+declared-services:
+  tradeoff-analytics-standard-service:
+    label: watsonta
+    plan: standard
+applications:
+- services:
+  - tradeoff-analytics-standard-service
+  name: tradeoff-analytics-nodejs
+  command: node app.js
+  path: .
+  memory: 128M
