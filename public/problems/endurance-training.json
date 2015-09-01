@@ -1,0 +1,58 @@
+{
+  "subject": "Endurance",
+  "columns": [
+    {
+      "key": "heart_rate",
+      "full_name": "Heart Rate",
+      "type": "numeric",
+      "is_objective": true,
+      "goal": "max",
+      "defaultValue": 0
+    },
+    {
+      "key": "duration",
+      "full_name": "Duration (Seconds)",
+      "type": "numeric",
+      "is_objective": true,
+      "goal": "max",
+      "format": "####0 s",
+      "defaultValue": 0
+    },
+    {
+      "key": "mode",
+      "full_name": "Exercise Type",
+      "type": "categorical",
+      "goal": "min",
+      "is_objective": true,
+      "range": ["run", "row", "sprints", "lifts"],
+      "preference": ["run", "row", "sprints", "lifts"],
+      "defaultValue": "lifts"
+    },
+    {
+      "key": "total_protein",
+      "full_name": "Protein (g)",
+      "type": "numeric",
+      "goal": "max",
+      "is_objective": true,
+      "significant_gain": 0.5,
+      "format": "####0 g",
+      "defaultValue": 0
+    },
+    {
+      "key": "calories_burned",
+      "full_name": "Calories Burned",
+      "type": "numeric"
+    },
+    {
+      "key": "weight",
+      "full_name": "Weight Lifted",
+      "type": "numeric",
+      "format": "####0 LB"
+    },
+    {
+      "key": "reps",
+      "full_name": "Exercise Reps",
+      "type": "numeric"
+    }
+  ]
+}

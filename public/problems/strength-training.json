@@ -1,0 +1,53 @@
+{
+  "subject": "Strength Training",
+  "columns": [
+    {
+      "key": "weight",
+      "full_name": "Weight",
+      "type": "numeric",
+      "is_objective": true,
+      "goal": "max",
+      "format": "####0 LB",
+      "defaultValue": 0
+    },
+    {
+      "key": "reps",
+      "full_name": "Reps",
+      "type": "numeric",
+      "is_objective": true,
+      "goal": "min",
+      "defaultValue": 100
+    },
+    {
+      "key": "total_protein",
+      "full_name": "Protein (g)",
+      "type": "numeric",
+      "goal": "max",
+      "is_objective": true,
+      "format": "####0 g",
+      "defaultValue": 0
+    },
+    {
+      "key": "mode",
+      "full_name": "Exercise Type",
+      "type": "categorical",
+      "range": ["run", "row", "sprints", "lifts"]
+    },
+    {
+      "key": "heart_rate",
+      "full_name": "Heart Rate Reserve (Ratio)",
+      "type": "numeric"
+    },
+    {
+      "key": "duration",
+      "full_name": "Duration (Seconds)",
+      "type": "numeric",
+      "format": "####0 s"
+    },
+    {
+      "key": "calories_burned",
+      "full_name": "Calories Burned",
+      "type": "numeric"
+    }
+  ]
+}
