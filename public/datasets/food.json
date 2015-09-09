@@ -1,0 +1,32 @@
+{
+  "food": [
+    {
+      "name": "Pizza",
+      "total_calories": 600,
+      "total_fat": 35,
+      "total_carbs": 65,
+      "total_protein": 20
+    },
+    {
+      "name": "Salad, Chicken, and Rice Meal",
+      "total_calories": 500,
+      "total_fat": 8,
+      "total_carbs": 40,
+      "total_protein": 50
+    },
+    {
+      "name": "Meal Replacement Shake",
+      "total_calories": 400,
+      "total_fat": 5,
+      "total_carbs": 40,
+      "total_protein": 30
+    },
+    {
+      "name": "Salad",
+      "calories": 200,
+      "total_fat": 15,
+      "total_carbs": 20,
+      "total_protein": 5
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "subject": "Weight Loss",
+  "columns": [
+    {
+      "key": "calories_burned",
+      "full_name": "Calories Burned",
+      "type": "numeric",
+      "is_objective": true,
+      "goal": "max",
+      "defaultValue": 0
+    },
+    {
+      "key": "mode",
+      "full_name": "Exercise Type",
+      "type": "categorical",
+      "goal": "min",
+      "is_objective": true,
+      "range": ["lifts", "sprints", "row", "run"],
+      "preference": ["lifts", "sprints", "row", "run"],
+      "defaultValue": "run"
+    },
+    {
+      "key": "total_calories",
+      "full_name": "Calories (g)",
+      "type": "numeric",
+      "goal": "min",
+      "is_objective": true,
+      "format": "####0 g",
+      "defaultValue": 9999
+    },
+    {
+      "key": "total_fat",
+      "full_name": "Fat (g)",
+      "type": "numeric",
+      "goal": "min",
+      "is_objective": true,
+      "significant_gain": 0.5,
+      "format": "####0 g",
+      "defaultValue": 9999
+    },
+    {
+      "key": "total_protein",
+      "full_name": "Protein (g)",
+      "type": "numeric",
+      "goal": "max",
+      "is_objective": false,
+      "format": "####0 g"
+    },
+    {
+      "key": "heart_rate",
+      "full_name": "Heart Rate Reserve (Ratio)",
+      "type": "numeric"
+    },
+    {
+      "key": "duration",
+      "full_name": "Duration (Seconds)",
+      "type": "numeric"
+    },
+    {
+      "key": "weight",
+      "full_name": "Weight Lifted",
+      "type": "numeric"
+    },
+    {
+      "key": "reps",
+      "full_name": "Reps",
+      "type": "numeric"
+    }
+  ]
+}

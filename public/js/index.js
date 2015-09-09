@@ -72,7 +72,7 @@
 
     taClient.subscribe('afterError', errCallback);
     taClient.subscribe('doneClicked', onResultSelection);
-    
+
     var topics = [ 'started', 'problemChanged', 'destroyed', 'doneClicked', 'optionClicked', 'X_finalDecisionChanged',
         'X_favoritesChanged', 'X_selectionChanged', 'X_filterChanged'/*, 'X_optionHovered'*/ ];
     topics.forEach(function(t){
@@ -80,7 +80,7 @@
         console.log(JSON.stringify(e));
       });
     });
-    
+
     taClient.start(callback);
   }
 
@@ -107,9 +107,16 @@
 
   function onPageLoad() {
     loadTradeoffAnalytics('basic', 'watson', onPageReady, onError);
-    loadSelectedProblem();
     loadProfile('basic');
     loadTheme('watson');
+    loadExercises().then(function() {
+      loadFood().then(function() {
+        loadSelectedProblem().then(function() {
+          onProblemChanged();
+          $('.problemText').change(onProblemChanged);
+        });
+      });
+    });
   }
 
   function onProblemChanged() {
@@ -119,29 +126,43 @@
     }
     try {
       var problem = JSON.parse($('.problemText').val());
+      var exercises = JSON.parse($('.exercisesText').val());
+      var food = JSON.parse($('.foodText').val());
       assertNotTrue(problem, 'Empty Problem');
       assertNotTrue($.isArray(problem.columns), 'Invalid problem columns');
-      assertNotTrue($.isArray(problem.options), 'Invalid problem options');
+      assertNotTrue(exercises, 'Empty Exercises');
+      assertNotTrue($.isArray(exercises.exercises_plans), 'Invalid exercise options');
 
-      createOptionsTable(problem, tableParent);
+      createOptionsTable(problem, exercises, food, tableParent);
     } catch (err) {
       onError({error:'JSON parsing error'});
     }
   }
 
+  function loadExercises() {
+    var path = 'datasets/exercises.json';
+    return $.getJSON(path, function(data) {
+      $('.exercisesText').val(JSON.stringify(data, null, 2)).change();
+    });
+  }
+
+  function loadFood() {
+    var path = 'datasets/food.json';
+    return $.getJSON(path, function(data) {
+      $('.foodText').val(JSON.stringify(data, null, 2)).change();
+    });
+  }
+
   function loadSelectedProblem() {
     var path = 'problems/' + $('.problems').val();
-    $.getJSON(path, function(data) {
+    return $.getJSON(path, function(data) {
       $('.problemText').val(JSON.stringify(data, null, 2)).change();
     });
   }
 
-  function createOptionsTable(problem, parent) {
+  function createOptionsTable(problem, exercises, food, parent) {
     var table = createDom('table', {}, parent);
     var tr = createDom('tr', {}, table);
-    createDom('th', {
-      innerHTML: 'Id'
-    }, tr);
     createDom('th', {
       innerHTML: 'Name'
     }, tr);
@@ -158,19 +179,29 @@
         innerHTML: c.full_name
       }, th);
     });
-    problem.options.forEach(function(op, i) {
+    exercises.exercises_plans.forEach(function(op, i) {
       var tr = createDom('tr', {
         className: i % 2 ? 'odd' : 'even'
       }, table);
-      createDom('td', {
-        innerHTML: op.key
-      }, tr);
       createDom('td', {
         innerHTML: op.name
       }, tr);
       problem.columns.forEach(function(c) {
         createDom('td', {
-          innerHTML: op.values[c.key] || 0
+          innerHTML: op[c.key] || c.defaultValue
+        }, tr);
+      });
+    });
+    food.food.forEach(function(op, i) {
+      var tr = createDom('tr', {
+        className: i % 2 ? 'odd' : 'even'
+      }, table);
+      createDom('td', {
+        innerHTML: op.name
+      }, tr);
+      problem.columns.forEach(function(c) {
+        createDom('td', {
+          innerHTML: op[c.key] || 0
         }, tr);
       });
     });
@@ -204,14 +235,53 @@
     if (!problemJson)
       return;
 
+    var exerciseJson = getJsonFromElement($('.exercisesText'));
+    if (!exerciseJson) {
+      return;
+    }
+
+    var foodJson = getJsonFromElement($('.foodText'));
+    if (!foodJson) {
+      return;
+    }
+
     var featuresJson = getJsonFromElement($('.featuresText'));
     if (!featuresJson)
       return;
+
+    var optionsJsonArray = calculationOptions(problemJson.columns, foodJson, exerciseJson);
+
+    problemJson.options = optionsJsonArray;
 
     recreateWidgetIfNeeded(function() {
       showTradeoffAnalytcsWidget(problemJson);
     });
 
+  }
+
+  function calculationOptions(columns, foodJson, exerciseJson) {
+    return [].concat(
+      foodJson.food,
+      exerciseJson.exercises_plans
+    ).map(function(obj, index) {
+      var option = {
+        key: index,
+        name: obj.name
+      };
+      delete obj.name;
+
+      option.values = obj;
+
+      columns.filter(function(column) {
+        return column.is_objective;
+      }).forEach(function(column) {
+        if (!option.values[column.key]) {
+          option.values[column.key] = column.defaultValue;
+        }
+      });
+
+      return option;
+    });
   }
 
   function onResultsReady() {
@@ -228,9 +298,9 @@
     onRestore();
     if (event.selectedOptionKeys) {
       $('.decisionArea').show();
-      var selectedOptionKey = event.selectedOptionKeys[0];//currently, maximum one option is selected 
+      var selectedOptionKey = event.selectedOptionKeys[0];//currently, maximum one option is selected
       var firstOptionName = currentProblem.options.filter(function(op){
-        return op.key === selectedOptionKey;
+        return op.key == selectedOptionKey;
       })[0].name;
       $('.decisionText').text(firstOptionName);
       jumpTo('.decisionArea');
@@ -262,10 +332,14 @@
     if (hidden) {
       $('.tableArea').show();
       $('.problemArea').hide();
+      $('.exercisesText').hide();
+      $('.foodText').hide();
       $('.viewTable').text('View / Edit JSON');
     } else {
       $('.tableArea').hide();
       $('.problemArea').show();
+      $('.exercisesText').show();
+      $('.foodText').show();
       $('.viewTable').text('Back to Table');
     }
     $('.problems').focus();
@@ -412,7 +486,6 @@ function onError(error) {
 
   // Problem events
   $('.problems').change(loadSelectedProblem);
-  $('.problemText').change(onProblemChanged);
   $('.viewTable').click(toggleTable);
   $('#advancedLink').click(openAdvanced);
 

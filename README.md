@@ -1,10 +1,19 @@
-# Tradeoff Analytics Node Starter Application
+# Example Health and Wellness Tradeoff Analytics Application
 
-  The IBM Watson [Tradeoff Analytics][service_url] service helps you make
-  better choices under multiple conflicting goals. The service combines smart
-  visualization and recommendations for tradeoff exploration.
+  The IBM Watson [Tradeoff Analytics][service_url] service helps filter data with
+  multiple and conflicting objectives by reducing noise and identifying ideal matches
+  based off of analytical analysis through multiple defined objectives. This provided
+  sample application allows the user to select various health related questions -- endurance training, strength training, and weight loss -- and offers recommendations based off of the
+  combination of both exercise and diet related data. Using the IBM Watson widget, the
+  user is presented with visual graphs showing the various options filtered from the
+  initial list of data.
 
-Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
+## Features  
+* Allows users to analyzes and visualize the best choices to health problems from datasets containing mixed and competing trade-offs.
+* Allows users to modify and edit the existing JSON datasets and objectives then re-analyze and calculate the results.
+* Allows users to edit the Watson embedded widget profile that displays the calculated results.
+
+Give it a try! Navigate to [our bluemix instance][bluemix_app_url] of this application or click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/tradeoff-analytics-nodejs)
 
@@ -100,7 +109,7 @@ To troubleshoot your Bluemix app the main useful source of information are the l
 
 ## Open Source @ IBM
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
-
+[bluemix_app_url]: http://watsonta.mybluemix.net/
 [service_url]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [getting_started]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/

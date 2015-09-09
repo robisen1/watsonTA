@@ -10,10 +10,9 @@ block row-content
           div.col-lg-6.col-md-6.col-xs-6
             label.control-label(for='problems') Select a scenario to find the best options in the scenario:
             select#problems.problems.form-control
-              option(value='phones.json') Phones
-              option(value='finance.json') Finance
-              option(value='treatments-selection.json') Treatments-selection
-              option(value='drug-candidates.json') Drug-candidates
+              option(value='endurance-training.json') Endurance Training
+              option(value='strength-training.json') Strength Training
+              option(value='weight-loss.json') Weight Loss
           div.col-lg-6.col-md-6.col-xs-6.text-right
             input.analyze.btn(style='display:none;', type='button', value='Analyze Sample Data')
             span.loading
@@ -25,6 +24,8 @@ block row-content
         div.form-group.row
           div.col-lg-12.problemArea(style='display:none;')
             textarea.problemText
+            textarea.exercisesText
+            textarea.foodText
           div.col-lg-12.tableArea
             label The list of options to analyze:
             div#tablePlaceHolder

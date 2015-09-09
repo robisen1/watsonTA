@@ -20,16 +20,22 @@ var express = require('express'),
   app = express(),
   bluemix = require('./config/bluemix'),
   watson = require('watson-developer-cloud'),
-  extend = require('util')._extend;
+  extend = require('util')._extend,
+  env = require('node-env-file');
 
 // Bootstrap application settings
 require('./config/express')(app);
+
+env(__dirname + '/.env');
 
 // if bluemix credentials exists, then override local
 var credentials = extend({
   version: 'v1',
   username: '<username>',
   password: '<password>'
+}, {
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD
 }, bluemix.getServiceCreds('tradeoff_analytics')); // VCAP_SERVICES
 
 // Create the service wrapper

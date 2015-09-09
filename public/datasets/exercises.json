@@ -1,0 +1,79 @@
+{
+  "exercises_plans": [
+    {
+      "name": "Run 5k",
+      "calories_burned": 600,
+      "duration": 2700,
+      "heart_rate": 170,
+      "mode": "run"
+    },
+    {
+      "name": "Sprints",
+      "calories_burned": 300,
+      "duration": 700,
+      "heart_rate": 185,
+      "mode": "run"
+    },
+    {
+      "name": "Bench Press 3 Sets 3 Reps",
+      "calories_burned": 90,
+      "reps": 3,
+      "weight": 200,
+      "duration": 360,
+      "heart_rate": 110,
+      "mode": "lifts"
+    },
+    {
+      "name": "Bench Press 5 Sets 10 Reps",
+      "calories_burned": 120,
+      "reps": 10,
+      "weight": 80,
+      "duration": 480,
+      "heart_rate": 130,
+      "mode": "lifts"
+    },
+    {
+      "name": "Squat 3 Sets 5 Reps",
+      "calories_burned": 120,
+      "reps": 5,
+      "weight": 220,
+      "duration": 360,
+      "heart_rate": 120,
+      "mode": "lifts"
+    },
+    {
+      "name": "Squat 5 Sets 20 Reps",
+      "calories_burned": 150,
+      "reps": 20,
+      "weight": 60,
+      "duration": 520,
+      "heart_rate": 160,
+      "mode": "lifts"
+    },
+    {
+      "name": "Pull-ups weighted 3 Sets 5 Reps",
+      "calories_burned": 115,
+      "reps": 3,
+      "weight": 185,
+      "duration": 300,
+      "heart_rate": 120,
+      "mode": "lifts"
+    },
+    {
+      "name": "Pull-ups 5 Sets 10 Reps",
+      "calories_burned": 150,
+      "reps": 10,
+      "max_weight": 160,
+      "duration": 480,
+      "heart_rate": 155,
+      "mode": "lifts"
+    },
+    {
+      "name": "Rowing 30 minutes",
+      "calories_burned": 700,
+      "duration": 1800,
+      "heart_rate": 180,
+      "mode": "row"
+    }
+  ]
+}
